@@ -1,0 +1,60 @@
+A2 FF 		ldx FF
+9A 		txs
+48 		pha
+AD 00 50 	lda 5000
+29 80 		and 80
+D0 F9 		bne F9?
+68 		pla
+60 		rts
+A9 38 		lda 38
+8D 00 50 	sta 5000
+20 03 80 	jsr 8003
+A9 06 		lda 06
+8D 00 50 	sta 5000
+20 03 80 	jsr 8003
+A9 0E 		lda 0E
+8D 00 50 	sta 5000
+20 03 80 	jsr 8003
+A9 01 		lda 01
+8D 00 50 	sta 5000
+20 03 80 	jsr 8003
+A9 80 		lda 80
+8D 00 50 	sta 5000
+20 03 80 	jsr 8003
+60 		rts
+48 		pha
+8D 01 50 	sta 5001
+20 03 80 	jsr 8003
+AD 00 50 	lda 5000
+29 7F 		and 7F
+C9 14 		cmp 14
+D0 08 		bne 08?
+A9 C0 		lda C0
+8D 00 50 	sta 5000
+20 03 80 	jsr 8003
+68 		pla
+60 		rts
+8D 00 02 	sta 200
+48 		pha
+98 		tya
+A0 00 		ldy 00
+B9 00 02 	lda 200,y
+F0 06 		beq 06?
+20 36 80 	jsr 8036
+C8 		iny
+D0 F5 		bne F5?
+68 		pla
+A8 		tay
+68 		pla
+60 		rts
+20 0D 80 	jsr 800D
+AD 83 80 	lda 8083
+20 50 80 	jsr 8050
+4C 6F 80 	jmp 806F
+Data___
+54 72 69 63 6B 79 20 4C 69 67 68 74 73 21 
+21 21 00
+53 75 70 65 72 20 54 72 69 63 6B 79 20 
+4C 69 67 68 74 73 20 54 77 69 6E 6B 6C 65 21 21 
+21
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
