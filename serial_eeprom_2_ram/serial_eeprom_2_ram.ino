@@ -1,0 +1,58 @@
+#include <Wire.h>
+#include "eeprom.h"
+#include "ram.h"
+
+#define OFFSET 0x8000
+#define BUFFSIZE 32
+
+void setup() {
+    Wire.begin(); // initialise the connection
+    Serial.begin(115200);
+    unsigned int addr=0; //first address
+    byte b = 0;
+    byte buff[BUFFSIZE] = {0};
+
+Serial.println("Reading EEPROM.");
+
+//Read EEPROM to RAM
+    while (addr < 0x8000)
+    {
+//      if ((int)addr<0x10) {Serial.print("000");} //add leading zero
+//      else if ((int)addr<0x100) {Serial.print("00");} //add leading zero
+//      else if ((int)addr<0x1000) {Serial.print("0");} //add leading zero
+//      Serial.print(addr, HEX);
+//      Serial.print(":  ");
+      i2c_eeprom_read_buffer(0X50, addr, buff, BUFFSIZE );
+      for (int i=0; i<BUFFSIZE; i++){
+          if ((int)buff[i]<0x10) {Serial.print("0");} //add leading zero
+          if ((int)addr<0x10) {Serial.print("000");} //add leading zero
+          else if ((int)addr<0x100) {Serial.print("00");} //add leading zero
+          else if ((int)addr<0x1000) {Serial.print("0");} //add leading zero
+          Serial.print(addr, HEX);
+          Serial.print(":  ");
+        Serial.print((byte)buff[i], HEX); //print content to serial port
+        Serial.println(" ");
+
+        write_to_ram(addr, (byte)buff[i]);
+        serial_getch();
+        addr++; //increase address
+      }
+      Serial.println(" ");
+    }
+    Serial.println("Done.");
+
+}
+
+void loop() {
+
+}
+
+
+void serial_getch(){
+  char c;
+  while(Serial.available() == 0){}
+  if (Serial.available() > 0) {
+    // read the incoming byte:
+    c = Serial.read();
+  }
+}
