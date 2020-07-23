@@ -1,3 +1,5 @@
+#include <Wire.h>
+
 byte i2c_eeprom_read_byte( int deviceaddress, unsigned int eeaddress ) {
     byte rdata = 0xFF;
     Wire.beginTransmission(deviceaddress);

@@ -6,15 +6,18 @@
 #define SHIFT_LATCH 4
 #define WRITE_EN 5
 
+void ram_setup(void){
+  pinMode(SData, OUTPUT);
+  pinMode(SClock, OUTPUT);
+  pinMode(SLatch, OUTPUT);
+}
+
 void set_address(unsigned int address) {
   shiftOut(SHIFT_DATA, SHIFT_CLK, LSBFIRST, (address >> 8));
   shiftOut(SHIFT_DATA, SHIFT_CLK, LSBFIRST, address);
 }
 
 void write_to_ram(unsigned int address, byte data) {
-  pinMode(SData, OUTPUT);
-  pinMode(SClock, OUTPUT);
-  pinMode(SLatch, OUTPUT);
   
   shiftOut(SData, SClock, LSBFIRST, data);
   digitalWrite(SLatch, LOW);
@@ -29,20 +32,19 @@ void write_to_ram(unsigned int address, byte data) {
   digitalWrite(SLatch, HIGH);
   digitalWrite(SLatch, LOW);
 
+if (DEBUG == 1){
 Serial.println("In Function: ");
 Serial.print(address,BIN);
 Serial.println(data, BIN);
-//  shiftOut(SHIFT_DATA, SHIFT_CLK, LSBFIRST, data);
-//  set_address(address);
-//
-//  digitalWrite(SHIFT_LATCH, LOW);
-//  digitalWrite(SHIFT_LATCH, HIGH);
+}
   digitalWrite(WRITE_EN, LOW);
   delayMicroseconds(1);
   digitalWrite(WRITE_EN, HIGH);
   digitalWrite(SHIFT_LATCH, LOW);
   delay(10);
-Serial.println("End Function");
+ if (DEBUG == 1){
+  Serial.println("End Function");
+ }
 }
 
 // Cannot read from RAM to Arduino
