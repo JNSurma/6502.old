@@ -15,9 +15,9 @@ I/O	!8-NAND AND !A7         --> CS
 
 
 Qty. Chip	Socket
-1 - 24LS256	8 x .3
+1 - 24LS256	 8 x .3
 1 - ATMEGA328P	28 x .3
-2 - 74LS595	16 x .3
+3 - 74LS595	16 x .3
 1 - PD431000A	32 x .6
 1 - 65C02	40 x .6
 1 - 65C51	28 x .6
