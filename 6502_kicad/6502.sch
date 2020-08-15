@@ -1,6 +1,5 @@
 EESchema Schematic File Version 4
-LIBS:6502-cache
-EELAYER 26 0
+EELAYER 30 0
 EELAYER END
 $Descr USLedger 17000 11000
 encoding utf-8
@@ -26,7 +25,7 @@ F 3 "" H 2150 2500 60  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L Memory_RAM:628128 U2
+L 6502-rescue:628128-Memory_RAM U2
 U 1 1 5F31F682
 P 5400 2400
 F 0 "U2" H 5100 3550 50  0000 C CNN
@@ -128,7 +127,7 @@ Wire Wire Line
 Wire Wire Line
 	12350 1050 12350 850 
 $Comp
-L MCU_Module:Arduino_Nano_v2.x A1
+L 6502-rescue:Arduino_Nano_v2.x-MCU_Module A1
 U 1 1 5F3207EB
 P 10300 2350
 F 0 "A1" H 10000 3300 50  0000 C CNN
