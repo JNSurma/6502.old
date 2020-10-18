@@ -27,18 +27,13 @@ reset:
   lda #$00000001 ; Clear display
   jsr lcd_instruction
 
-  ldx #0
-print:
-  lda message,x
-  beq loop
+  lda #"4"
   jsr print_char
-  inx
-  jmp print
-
+  lda #"2"
+  jsr print_char
+  
 loop:
   jmp loop
-
-message: .asciiz "Hello, world!"
 
 lcd_wait:
   pha
@@ -81,6 +76,9 @@ print_char:
   lda #RS         ; Clear E bits
   sta PORTA
   rts
+
+nmi:
+irq:
 
   .org $fffa
   .word nmi
