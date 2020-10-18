@@ -6,7 +6,7 @@ DDRA = $6003
 value = $0200    ; 2 bytes
 mod10 = $0202    ; 2 bytes
 message = $0204  ; 6 bytes
-
+counter = $020a  ; 2 bytes
 
 E  = %10000000
 RW = %01000000
@@ -33,12 +33,20 @@ reset:
   jsr lcd_instruction
 
   lda #0
+  sta counter
+  sta counter + 1
+  
+loop:
+  lda #$00000010 ; Home
+  jsr lcd_instruction
+
+  lda #0
   sta message
   
   ; Initialize value to be the number to convert 
-  lda number
+  lda counter
   sta value
-  lda number + 1
+  lda counter + 1
   sta value + 1
 
 divide:  
@@ -82,7 +90,7 @@ ignore_result:
   lda value
   ora value +1
   bne divide ; branch if value != 0
-  
+
   ldx #0
 print:
   lda message,x
@@ -91,8 +99,6 @@ print:
   inx
   jmp print
   
-loop:
-  jmp loop
 
 number: .word 1729
 
@@ -160,9 +166,17 @@ print_char:
   sta PORTA
   rts
 
-
 nmi:
+  rti
+  
 irq:
+  inc counter
+  bne exit_irq
+  inc counter + 1
+exit_irq:
+  
+  rti
+  
 
   .org $fffa
   .word nmi
