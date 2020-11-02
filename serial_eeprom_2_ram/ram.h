@@ -32,19 +32,21 @@ void write_to_ram(unsigned int address, byte data) {
   digitalWrite(SLatch, HIGH);
   digitalWrite(SLatch, LOW);
 
-if (DEBUG == 1){
-Serial.println("In Function: ");
-Serial.print(address,BIN);
-Serial.println(data, BIN);
-}
+  if (DEBUG == 1){
+  Serial.println("In Function: write_to_ram()");
+  Serial.print(address,BIN);
+  Serial.println(data, BIN);
+  }
+
   digitalWrite(WRITE_EN, LOW);
   delayMicroseconds(1);
   digitalWrite(WRITE_EN, HIGH);
   digitalWrite(SHIFT_LATCH, LOW);
   delay(10);
- if (DEBUG == 1){
-  Serial.println("End Function");
- }
+
+  if (DEBUG == 1){
+    Serial.println("End Function");
+  }
 }
 
 // Cannot read from RAM to Arduino

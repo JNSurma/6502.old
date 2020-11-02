@@ -197,7 +197,7 @@ delay:
   dey
   bne delay
   
-  bit PORTA
+  bit PORTA ;Read PORTA to clear interrupt before returning from interrupt
 
   pla
   tay
