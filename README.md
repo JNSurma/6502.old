@@ -1,2 +1,2 @@
 # 6502_sbc
-My own design of a 6502 SBC
+My 6502 SBC Based on Ben Eater's 6502 Breadboard Computer
